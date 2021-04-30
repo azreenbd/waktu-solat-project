@@ -1,5 +1,5 @@
 <template>
-    <div class="p-3">
+    <div class="p-3 max-width">
         <div v-if="!waktuSolat && isLoading">
             loading...
         </div>
@@ -7,21 +7,28 @@
             error
         </div>
         <div v-else>
+            <div class="m-1">
+                <h2>{{ getZone(zoneId).state }}</h2>
+            </div>
             
+            <div class="box">
+                <b-form-select v-model="zoneId" :options="options" class="mb-4" @change="getWaktuSolat(interval, zoneId)"></b-form-select>
 
-            <h2>{{ getZone(zoneId).state }}</h2>
-            <b-form-select v-model="zoneId" :options="options" @change="getWaktuSolat(interval, zoneId)"></b-form-select>
-
-            {{waktuSolat[0].date}}
-            {{waktuSolat[0].day}}
-
-            <p>Imsak {{waktuSolat[0].imsak}}</p>
-            <p>Subuh {{waktuSolat[0].fajr}}</p>
-            <p>Syuruk {{waktuSolat[0].syuruk}}</p>
-            <p>Zuhur {{waktuSolat[0].dhuhr}}</p>
-            <p>Asar {{waktuSolat[0].asr}}</p>
-            <p>Maghrib {{waktuSolat[0].maghrib}}</p>
-            <p>Isyak {{waktuSolat[0].isha}}</p>
+                <div class="px-3">
+                    <h4>{{waktuSolat[0].day}}</h4>
+                    <p>{{waktuSolat[0].date}}</p>    
+                        
+                    <div class="d-flex flex-wrap">
+                        <div class="box-muted"><b>Imsak</b> {{waktuSolat[0].imsak}}</div>
+                        <div class="box-muted"><b>Subuh</b> {{waktuSolat[0].fajr}}</div>
+                        <div class="box-muted"><b>Syuruk</b> {{waktuSolat[0].syuruk}}</div>
+                        <div class="box-muted"><b>Zuhur</b> {{waktuSolat[0].dhuhr}}</div>
+                        <div class="box-muted"><b>Asar</b> {{waktuSolat[0].asr}}</div>
+                        <div class="box-muted"><b>Maghrib</b> {{waktuSolat[0].maghrib}}</div>
+                        <div class="box-muted"><b>Isyak</b> {{waktuSolat[0].isha}}</div>
+                    </div>
+                </div>
+            </div>
 
             <!-- <b-table :items="zones"></b-table> -->
         </div>
@@ -30,7 +37,8 @@
 
 <script>
 import axios from 'axios';
-import json from "@/assets/json/zone.json";
+import zoneJson from "@/assets/json/zone.json";
+import stateJson from "@/assets/json/state.json";
 
 const $ = axios.create({
     baseURL:'https://www.e-solat.gov.my/index.php?r=esolatApi/'
@@ -44,14 +52,15 @@ export default {
             zoneId: 'WLY01',
             interval: 0, /** 0=today, 1=week, 2=month, 3=year */
             waktuSolat: null,
-            zones: json.zones,
+            zones: zoneJson.zones,
+            states: stateJson.states,
             options: []
         }
     },
     mounted() {
         this.getWaktuSolat(this.interval, this.zoneId);
 
-        this.populateZoneSelect(this.zones);
+        this.populateZoneSelect(this.zones, this.states);
     },
     methods: {
         getZone(id) {
@@ -97,21 +106,35 @@ export default {
                 window.alert('Error');
             });
         },
-        populateZoneSelect(zones) {
+        populateZoneSelect(zones, states) {
             var options = [];
+            var stateZone = [];
             
-            for(var i in zones) {
+            for(var i in states) {
+                stateZone = [];
+
+                // find better way to filter this
+                // this is bad for performance
+                for(var j in zones) {
+                    if(zones[j].state == states[i]) {
+                        stateZone.push({
+                            'value': zones[j].id,
+                            'text': zones[j].name
+                        });
+                    }
+                }
+
                 options.push({
-                    'value': zones[i].id,
-                    'text': zones[i].name
+                    'label': states[i],
+                    'options': stateZone
                 });
             }
-            options.push = {
-                    'value': 'asdad',
-                    'text': 'afaff'
-                };
+            
 
             this.options = options;
+
+            console.log(this.options);
+
             // need to group by state
         }
     }
@@ -119,10 +142,28 @@ export default {
 </script>
 
 <style>
-    body {
-        background: #EFEFBB;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #D4D3DD, #EFEFBB);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #D4D3DD, #EFEFBB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.max-width {
+    max-width: 980px;
+}
+.box, .box-muted {
+    border-radius: .75em;
+    padding: .5em .5em;
+    margin: .25em;
+    color: #437880;
+}
 
-    }
+.box {
+    background: #fff;
+}
+
+.box-muted {
+    background: #eff4f5;
+}
+
+select {
+    background-color: #eff4f5 !important;
+    color: #437880 !important;
+    border: 2px solid #eff4f5 !important;
+    border-radius: .5em !important;
+}
 </style>
