@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-3">
         <div v-if="!waktuSolat && isLoading">
             loading...
         </div>
@@ -7,7 +7,11 @@
             error
         </div>
         <div v-else>
-            {{zoneName}}
+            
+
+            <h2>{{ getZone(zoneId).state }}</h2>
+            <b-form-select v-model="zoneId" :options="options" @change="getWaktuSolat(interval, zoneId)"></b-form-select>
+
             {{waktuSolat[0].date}}
             {{waktuSolat[0].day}}
 
@@ -38,16 +42,16 @@ export default {
             isLoading: true,
             isError: false,
             zoneId: 'WLY01',
-            zoneName: '',
             interval: 0, /** 0=today, 1=week, 2=month, 3=year */
             waktuSolat: null,
-            zones: json.zones
+            zones: json.zones,
+            options: []
         }
     },
     mounted() {
         this.getWaktuSolat(this.interval, this.zoneId);
 
-        this.zoneName = this.getZone(this.zoneId).name;
+        this.populateZoneSelect(this.zones);
     },
     methods: {
         getZone(id) {
@@ -92,11 +96,33 @@ export default {
                 this.isError = true;
                 window.alert('Error');
             });
+        },
+        populateZoneSelect(zones) {
+            var options = [];
+            
+            for(var i in zones) {
+                options.push({
+                    'value': zones[i].id,
+                    'text': zones[i].name
+                });
+            }
+            options.push = {
+                    'value': 'asdad',
+                    'text': 'afaff'
+                };
+
+            this.options = options;
+            // need to group by state
         }
     }
 }
 </script>
 
 <style>
+    body {
+        background: #EFEFBB;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #D4D3DD, #EFEFBB);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #D4D3DD, #EFEFBB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+    }
 </style>
