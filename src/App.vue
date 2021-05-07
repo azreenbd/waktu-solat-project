@@ -3,6 +3,10 @@
     <div class="d-flex justify-content-center">
       <router-view></router-view>
     </div>
+    <footer class="d-flex justify-content-center align-items-center text-muted mt-4">
+      <b-icon icon="github" title="GitHub" class="mr-1"></b-icon>
+      <a href="https://github.com/azreenbd" title="GitHub" target="_blank" class="text-muted">azreenbd</a>
+    </footer>
   </div>
 </template>
 
@@ -17,11 +21,8 @@ export default {
 
 html, body, #app {
   height: 100%;
-}
-
-#app {
   font-family: 'Nunito', sans-serif;
-  color: #fff;
-  background: #39c2d4;
+  color: rgb(85, 85, 85);
+  background: #f2fafc;
 }
 </style>
