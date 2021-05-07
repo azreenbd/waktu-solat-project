@@ -341,7 +341,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+/* Animation */
+$bg-url: "~@/assets/img/pattern.png";
+$bg-width: 300px;
+$bg-height: 346px;
+
+@keyframes bg-scrolling-diamond {
+  0% { background-position: 0px 0px; }
+  25% { background-position: 100px 100px; }
+  50% { background-position: 0px 200px; }
+  75% { background-position: -100px 100px; }
+  100% { background-position: 0 0; }
+}
+
+@keyframes bg-scrolling-side {
+  0% { background-position: $bg-width 0; }
+}
+
+/* Main CSS */
 .max-width {
     max-width: 980px;
 }
@@ -365,11 +383,18 @@ export default {
     width: calc(14% - .29em);
 }
 
-.sub-box.active {
+.sub-box.deactive {
     background: url("~@/assets/img/pattern.png");
     background-size: 300px;
     background-position: left;
     background-color: #0adf3f;
+}
+
+.sub-box.active {
+    background: url($bg-url) repeat 0 0;
+    background-color: #0adf3f;
+    animation: bg-scrolling-side 30s infinite;
+    animation-timing-function: linear;
 }
 
 .sub-box .title {
