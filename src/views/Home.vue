@@ -39,20 +39,20 @@
                             <div class="mb-3 title">Syuruk</div>
                             <div class="lead">{{ formatTime(waktuSolat[0].syuruk) }}</div>
                         </div>
-                        <div class="sub-box">
-                            <div class="mb-3 title" v-bind:class="{ active: isZohor }">Zohor</div>
+                        <div class="sub-box" v-bind:class="{ active: isZohor }">
+                            <div class="mb-3 title">Zohor</div>
                             <div class="lead">{{ formatTime(waktuSolat[0].dhuhr) }}</div>
                         </div>
-                        <div class="sub-box">
-                            <div class="mb-3 title" v-bind:class="{ active: isAsar }">Asar</div>
+                        <div class="sub-box" v-bind:class="{ active: isAsar }">
+                            <div class="mb-3 title">Asar</div>
                             <div class="lead">{{ formatTime(waktuSolat[0].asr) }}</div>
                         </div>
-                        <div class="sub-box">
-                            <div class="mb-3 title" v-bind:class="{ active: isMaghrib }">Maghrib</div>
+                        <div class="sub-box" v-bind:class="{ active: isMaghrib }">
+                            <div class="mb-3 title">Maghrib</div>
                             <div class="lead">{{ formatTime(waktuSolat[0].maghrib) }}</div>
                         </div>
-                        <div class="sub-box">
-                            <div class="mb-3 title" v-bind:class="{ active: isIsyak }">Isyak</div>
+                        <div class="sub-box"  v-bind:class="{ active: isIsyak }">
+                            <div class="mb-3 title">Isyak</div>
                             <div class="lead">{{ formatTime(waktuSolat[0].isha) }}</div>
                         </div>
                     </div>
@@ -400,13 +400,6 @@ $bg-height: 346px;
     width: calc(14% - .29em);
 }
 
-.sub-box.deactive {
-    background: url("~@/assets/img/pattern.png");
-    background-size: 300px;
-    background-position: left;
-    background-color: #0adf3f;
-}
-
 .sub-box.active {
     background: url($bg-url) repeat 0 0;
     background-color: #0adf3f;
@@ -422,6 +415,7 @@ $bg-height: 346px;
 
 .sub-box.active .title {
     color: #ffffff;
+    text-shadow: 0 1.25px 0 #0adf3f;
 }
 
 .sub-box:first-child {
