@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { setCookie, getCookie } from "@/assets/js/cookie.js";
+
 export default {
   name: 'App',
   data() {
@@ -27,7 +29,7 @@ export default {
   },
   created() {
     // check cookies for theme options
-    switch(this.getCookie("theme")) {
+    switch(getCookie("theme")) {
       case "dark":
         this.darkMode = true;
         break;
@@ -51,28 +53,13 @@ export default {
 
       // change background and set cookies on darkMode toggle
       if(this.darkMode) {
-        document.cookie = "theme=dark";
+        setCookie("theme", "dark", 3650);
         document.body.className = "dark"
       }
       else {
-        document.cookie = "theme=light";
+        setCookie("theme", "light", 3650);
         document.body.classList.remove("dark");
       }
-    },
-    getCookie(cname) {
-      var name = cname + "=";
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var ca = decodedCookie.split(';');
-      for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return "";
     }
   }
 }
