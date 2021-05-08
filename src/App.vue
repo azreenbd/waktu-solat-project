@@ -102,7 +102,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #e6e9ea;
+  background-color: #0adf3f;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -110,10 +110,10 @@ export default {
 .slider:before {
   position: absolute;
   content: "";
-  height: 30px;
-  width: 30px;
-  left: 2px;
-  bottom: 4px;
+  height: 28px;
+  width: 28px;
+  left: 3px;
+  bottom: 3px;
   top: 0;
   bottom: 0;
   margin: auto 0;
@@ -122,10 +122,6 @@ export default {
   background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
   background-repeat: no-repeat;
   background-position: center;
-}
-
-input:checked + .slider {
-  background-color: #0adf3f;
 }
 
 input:checked + .slider:before {
