@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center align-items-center" style="min-height: calc(100% - 4em)">
       <router-view></router-view>
     </div>
-    <footer class="d-flex justify-content-center align-items-center text-muted mt-4">
+    <footer class="d-flex justify-content-center align-items-center text-muted my-4">
       <b-icon icon="github" title="GitHub" class="mr-1"></b-icon>
       <a href="https://github.com/azreenbd" title="GitHub" target="_blank" class="text-muted">azreenbd</a>
     </footer>
