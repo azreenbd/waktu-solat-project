@@ -66,6 +66,7 @@
 
 <script>
 import axios from 'axios';
+import { setCookie, getCookie } from "@/assets/js/cookie.js";
 import zoneJson from "@/assets/json/zone.json";
 import stateJson from "@/assets/json/state.json";
 
@@ -98,6 +99,15 @@ export default {
     created() {
         // Page Title
         document.title = 'Waktu Solat by azreenbd';
+
+        // check cookies for zone options
+        let zoneCookie = getCookie("zone");
+        if(zoneCookie != "") {
+            // check if zone is valid
+            if(this.zoneExist(zoneCookie)) {
+                this.zoneId = getCookie("zone");
+            }
+        }
     },
     mounted() {
         this.getWaktuSolat(this.interval, this.zoneId);
@@ -115,8 +125,19 @@ export default {
         getZone(id) {
             return this.zones.find(zone => zone.id === id);
         },
+        zoneExist(zoneId) {
+            for(var i in this.zones) {
+                if(this.zones[i].id == zoneId) {
+                    return true;
+                }
+            }
+            return false;
+        },
         async getWaktuSolat(interval, zone) {
             var period;
+
+            // set cookie
+            setCookie("zone", zone, 3650);
 
             switch(interval) {
                 case 0:
