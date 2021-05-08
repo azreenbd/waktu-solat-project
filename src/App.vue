@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <div class="d-flex justify-content-center align-items-center text-muted my-4">
-      <label id="switch" class="switch">
+    <div class="d-flex justify-content-center" style="min-height: calc(100% - 10em)">
+      <router-view :dark-mode="darkMode"></router-view>
+    </div>
+    <footer class="d-flex flex-column justify-content-center align-items-center text-muted py-4">
+      <small>Tema</small>
+      <label id="switch" class="switch mb-4">
         <input type="checkbox" v-model="darkModeSelected" @change="toggleDarkMode()" id="slider">
         <span class="slider round"></span>
       </label>
-    </div>
-    <div class="d-flex justify-content-center align-items-center" style="min-height: calc(100% - 4em)">
-      <router-view :dark-mode="darkMode"></router-view>
-    </div>
-    <footer class="d-flex justify-content-center align-items-center text-muted my-4">
-      <b-icon icon="github" title="GitHub" class="mr-1"></b-icon>
-      <a href="https://github.com/azreenbd" title="GitHub" target="_blank" class="text-muted">azreenbd</a>
+      <div>
+        <b-icon icon="github" title="GitHub" class="mr-1"></b-icon>
+        <a href="https://github.com/azreenbd" title="GitHub" target="_blank" class="text-muted">azreenbd</a>
+      </div>
     </footer>
   </div>
 </template>

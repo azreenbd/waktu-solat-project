@@ -9,3 +9,7 @@ body {
 html, body, #app {
     height: 100%;
 }
+
+.max-width {
+    max-width: 980px;
+}

@@ -439,7 +439,7 @@ $bg-height: 346px;
 
 .sub-box.active .title {
     color: #ffffff;
-    text-shadow: 0 1.25px 0 #0adf3f;
+    text-shadow: 0 .09em 0 #11b139;
 }
 
 .sub-box.active.dark .lead {
