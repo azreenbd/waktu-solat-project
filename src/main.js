@@ -12,6 +12,8 @@ Vue.use(IconsPlugin)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import './assets/css/main.css';
+import './assets/css/dark-mode.css';
 
 new Vue({
   el: '#app',
