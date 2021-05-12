@@ -90,7 +90,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0adf3f;
+  background-color: #c5d7db;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -107,16 +107,20 @@ export default {
   margin: auto 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+  background: white url('~@/assets/img/brightness-high.svg');
   background-repeat: no-repeat;
   background-position: center;
+}
+
+input:checked + .slider {
+  background-color: #303030;
 }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(24px);
   -ms-transform: translateX(24px);
   transform: translateX(24px);
-  background: #414141 url('https://i.ibb.co/FxzBYR9/night.png');
+  background: #0f0f0f url('~@/assets/img/moon-stars-fill.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
